@@ -1,0 +1,110 @@
+$card_width: 60vw;
+$paragraph_text: rgba(0, 0, 0, .54);
+
+.card {
+	padding: $padding_unit (100vw - $card_width)/2;
+	color: $dark_text;
+
+	&.anchor {
+		padding-top: $padding_unit+$header_height;
+		margin-top: -$header_height;
+	}
+
+	&:nth-child(odd) {
+		background-color: $lighter_grey;
+	}
+
+	h2 {
+		font-size: 2.5em;
+
+		@media screen and (max-width: $mobile_s) {
+			font-size: 2.0em;
+		}
+	}
+
+	h3 {
+		color: rgba(0, 0, 0, .75);
+	}
+
+	h4 {
+		color: rgba(0, 0, 0, .65);
+		font-style: italic;
+	}
+
+	p {
+		color: $paragraph_text;
+		font-size: 1.1em;
+		padding: $padding_unit/2 0;
+
+		@media screen and (max-width: $mobile_s) {
+			font-size: 1.0em;
+		}
+	}
+
+	.first {
+		margin-top: $padding_unit*2;
+	}
+
+	// Column setup
+	div.columns {
+		// Flexbox setup
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
+		align-items: flex-start;
+		align-content: flex-start;
+	}
+
+	ul {
+		padding-top: $padding_unit/2;
+		padding-bottom: $padding_unit/2;
+
+		li {
+			color: $paragraph_text;
+
+			a {
+				color: $paragraph_text;
+				text-decoration: none;
+			}
+		}
+
+		&.links li {
+			padding: $padding_unit/3 0;
+		}
+	}
+
+	a.button {
+		display: inline-block;
+		border: $padding_unit / 2 solid $dark_text;
+		padding: $padding_unit * 2;
+		margin: $padding_unit * 2 0;
+
+		color: $dark_text;
+		text-decoration: none;
+		font-size: 1.1em;
+
+		transition: background-color $animation, color $animation;
+
+		&:hover {
+			background-color: $dark_text;
+			color: white;
+		}
+
+		@media screen and (max-width: $mobile_m) {
+			display: block;
+			margin: $padding_unit 0;
+		}
+		@media screen and (max-width: $mobile_s) {
+			padding: $padding_unit;
+		}
+	}
+
+	@media screen and (max-width: 800px) {
+		$card_width: 80vw;
+		padding: $padding_unit (100vw - $card_width)/2;
+	}
+	@media screen and (max-width: $mobile_l) {
+		$card_width: 90vw;
+		padding: $padding_unit (100vw - $card_width)/2;
+	}
+}

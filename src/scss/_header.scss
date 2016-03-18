@@ -1,0 +1,38 @@
+$header_height: 56px;
+$header_break: 540px;
+
+#header_background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: $header_height;
+	z-index: 900;
+	background-color: rgba(0,0,0,.66);
+	opacity: 0;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: $header_height;
+	z-index: 1000;
+
+	// Flexbox setup
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: stretch;
+	align-content: center;
+
+	h1 {
+		display: inline-block;
+		font-size: 30px;
+		line-height: $header_height - $padding_unit;
+		vertical-align: middle;
+		color: white;
+		margin: $padding_unit / 2;
+	}
+}

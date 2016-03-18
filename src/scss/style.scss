@@ -1,0 +1,104 @@
+@import 'variables';
+@import 'fonts';
+
+@mixin blur($blur_distance) {
+	filter: blur($blur_distance);
+	margin: -$blur_distance -$blur_distance * 2 -$blur_distance * 2 -$blur_distance;
+}
+
+*, body, html {
+	margin: 0;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	// Smooth font hacks
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .004);
+
+	min-height: 100%;
+	// Flexbox setup
+	display: flex;
+	flex-direction: column;
+
+	& > .card:not(footer) {
+		flex: 1 0 auto;
+	}
+}
+
+header, footer {
+	flex: none;
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	@media screen and (max-width: $mobile_l) {
+		top: percentage(2/3);
+		transform: translate(-50%, percentage(-2/3));
+	}
+}
+
+// Header
+@import 'header';
+
+#home {
+	position: relative;
+	height: calc(40vw + #{$header_height});
+	max-height: 90vh;
+	overflow: hidden;
+
+	.background_image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+
+		background-color: $dark_grey;
+		background-image: url(../images/banner.jpeg);
+		background-repeat: no-repeat;
+		background-position: left center;
+		@include blur(5px);
+	}
+
+	#title {
+		padding: $padding_unit;
+		text-align: center;
+
+		h1 {
+			color: white;
+			font-weight: bold;
+			font-size: 5.0em;
+			margin-bottom: $padding_unit;
+
+			@media screen and (max-width: $mobile_l) {
+				font-size: 4.5em;
+			}
+			@media screen and (max-width: $mobile_m) {
+				font-size: 4.0em;
+			}
+			@media screen and (max-width: $mobile_s) {
+				font-size: 3.4em;
+			}
+		}
+
+		@media screen and (max-width: $mobile_l) {
+			width: 100%;
+		}
+	}
+}
+
+// Card style
+@import 'card';
+
+// Footer
+@import 'footer';

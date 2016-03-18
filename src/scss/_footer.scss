@@ -1,0 +1,37 @@
+footer.card {
+	background: $dark_grey !important;
+	color: white;
+	text-align: center;
+
+	.copyright {
+		color: $light_grey;
+	}
+
+	.social {
+		// Flexbox setup
+		display: inline-flex;
+		flex-flow: row nowrap;
+		justify-content: center;
+		align-items: stretch;
+		align-content: center;
+
+		a {
+			width: 24px;
+			height: 24px;
+			text-decoration: none;
+			padding: $padding_unit;
+
+			svg {
+				transition: fill $animation;
+			}
+
+			&:hover svg {
+				fill: white !important;
+			}
+		}
+
+		&:hover > a svg {
+			fill: $light_grey;
+		}
+	}
+}
