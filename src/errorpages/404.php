@@ -40,6 +40,12 @@ function version($file) {
 		</p>
 		<a class="button" href="/">Go to home page</a>
 	</div>
+	<div class="card">
+		<h2>Find what you are looking for</h2>
+		<div id="search">
+			<?php require('../cse.html') ?>
+		</div>
+	</div>
 
 	<!-- Footer -->
 	<?php require('../components/footer.html'); ?>
