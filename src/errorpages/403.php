@@ -29,7 +29,7 @@ function version($file) {
 	<div id="home">
 		<div class="background_image"></div>
 		<div id="title" class="center">
-			<h1>403</h1>
+			<h1>Forbidden</h1>
 		</div>
 	</div>
 
@@ -38,6 +38,7 @@ function version($file) {
 		<p>
 			You don't have the permission to access <i><?=$_SERVER[REQUEST_URI]?> on this server</i>
 		</p>
+		<a class="button" href="/">Go to home page</a>
 	</div>
 
 	<!-- Footer -->

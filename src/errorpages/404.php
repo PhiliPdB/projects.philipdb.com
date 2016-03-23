@@ -29,7 +29,7 @@ function version($file) {
 	<div id="home">
 		<div class="background_image"></div>
 		<div id="title" class="center">
-			<h1>404</h1>
+			<h1>Not found</h1>
 		</div>
 	</div>
 
