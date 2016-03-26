@@ -20,6 +20,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, .004);
+	font-size: $default_font_size;
 
 	min-height: 100%;
 	// Flexbox setup
@@ -42,8 +43,8 @@ header, footer {
 	transform: translate(-50%, -50%);
 
 	@media screen and (max-width: $mobile_l) {
-		top: percentage(2/3);
-		transform: translate(-50%, percentage(-2/3));
+		top: 60%;
+		transform: translate(-50%, -50%);
 	}
 }
 
@@ -77,17 +78,52 @@ header, footer {
 		h1 {
 			color: white;
 			font-weight: bold;
-			font-size: 5.0em;
+			font-size: $default_font_size*5;
 			margin-bottom: $padding_unit;
 
 			@media screen and (max-width: $mobile_l) {
-				font-size: 4.5em;
+				margin-bottom: $padding_unit/2;
 			}
 			@media screen and (max-width: $mobile_m) {
-				font-size: 4.0em;
+				font-size: $default_font_size*4;
 			}
 			@media screen and (max-width: $mobile_s) {
-				font-size: 3.4em;
+				font-size: $default_font_size*3.5;
+			}
+		}
+
+		.buttons {
+			width: 100%;
+
+			a {
+				width: calc(49% - 5% - #{$padding_unit});
+				margin: 1.25%;
+				padding: 1.25%;
+				display: inline-block;
+				background: transparent;
+				border: $padding_unit / 2 solid white;
+				cursor: pointer;
+
+				font-size: 2.4em;
+				color: white;
+				text-decoration: none;
+
+				transition: background-color $animation, color $animation;
+				
+				&:hover {
+					background-color: white;
+					color: $dark_text;
+				}
+
+				@media screen and (max-width: $mobile_l) {
+					font-size: $default_font_size*1.9;
+				}
+				@media screen and (max-width: $mobile_m) {
+					font-size: $default_font_size*1.7;
+				}
+				@media screen and (max-width: $mobile_s) {
+					font-size: $default_font_size*1.5;
+				}
 			}
 		}
 
