@@ -65,7 +65,7 @@ header, footer {
 		right: 0;
 
 		background-color: $dark_grey;
-		background-image: url(../images/banner.jpeg);
+		background-image: url('../images/banner.jpeg');
 		background-repeat: no-repeat;
 		background-position: left center;
 		@include blur(5px);
