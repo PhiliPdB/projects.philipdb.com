@@ -10,7 +10,7 @@ function version($file) {
 <html lang="en">
 <head>
 	<?php require('metatags.html') ?>
-	<meta name="robots" content="noindex, follow" />
+	<meta name="robots" content="index, follow" />
 	
 	<title>Project list</title>
 	
@@ -37,19 +37,19 @@ function version($file) {
 	<div class="card">
 		<h2>Projects</h2>
 		<ul class="first">
-			<li><a href="/mastermind">MasterMind</a></li>
-			<li><a href="/systeminfo">SystemInfo</a></li>
-			<li><a href="/PillowBook">PillowBook &#40;Sorry for dutch&#41;</a></li>
-			<li><a href="/analogClock">Analog Clock</a></li>
+			<li><a target="_blank" href="/mastermind">MasterMind</a></li>
+			<li><a target="_blank" href="/systeminfo">SystemInfo</a></li>
+			<li><a target="_blank" href="/PillowBook">PillowBook &#40;Sorry for dutch&#41;</a></li>
+			<li><a target="_blank" href="/analogClock">Analog Clock</a></li>
 		</ul>
-		<a class="button" href="//github.com/PhiliPdB">View my GitHub profile</a>
+		<a class="button" href="//github.com/PhiliPdB" target="_blank">View my GitHub profile</a>
 	</div>
 	<div class="card">
 		<h2>Older projects</h2>
 		<ul class="first">
-			<li><a href="/pong">Pong</a></li>
-			<li><a href="/minesweeper">MineSweeper</a></li>
-			<li><a href="/tic-tac-toe">Tic Tac Toe</a></li>
+			<li><a target="_blank" href="/pong">Pong</a></li>
+			<li><a target="_blank" href="/minesweeper">MineSweeper</a></li>
+			<li><a target="_blank" href="/tic-tac-toe">Tic Tac Toe</a></li>
 		</ul>
 	</div>
 
