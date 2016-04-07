@@ -35,7 +35,7 @@ function version($file) {
 	</div>
 
 	<div class="card">
-		<h2>Projects</h2>
+		<h2>Web projects</h2>
 		<ul class="first">
 			<li><a target="_blank" href="/mastermind">MasterMind</a></li>
 			<li><a target="_blank" href="/systeminfo">SystemInfo</a></li>
@@ -45,11 +45,20 @@ function version($file) {
 		<a class="button" href="//github.com/PhiliPdB" target="_blank">View my GitHub profile</a>
 	</div>
 	<div class="card">
+		<h2>Android projects</h2>
+		<ul class="first">
+			<li><a target="_blank" href="https://play.google.com/apps/testing/com.woording.android">Woording &#40;beta&#41;</a></li>
+			<li><a target="_blank" href="https://play.google.com/store/apps/details?id=nl.philipdb.abcformule">Quadratic equation</a></li>
+		</ul>
+		<a class="button" href="https://play.google.com/store/apps/dev?id=4947359272689647365" target="_blank">View Android developer page</a>
+	</div>
+	<div class="card">
 		<h2>Older projects</h2>
 		<ul class="first">
 			<li><a target="_blank" href="/pong">Pong</a></li>
 			<li><a target="_blank" href="/minesweeper">MineSweeper</a></li>
 			<li><a target="_blank" href="/tic-tac-toe">Tic Tac Toe</a></li>
+			<li><a target="_blank" href="https://play.google.com/store/apps/details?id=nl.philipdb.snake">Snake</a></li>
 		</ul>
 	</div>
 
