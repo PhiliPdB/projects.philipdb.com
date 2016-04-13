@@ -114,9 +114,6 @@ gulp.task('build:html', () => {
 // scss stuff
 gulp.task('build:scss', () => {
 	gulp.src(paths.styles.src)
-		.pipe($.changed(paths.styles.dest, {
-			extension: '.css'
-		}))
 		.pipe($.sass().on('error', $.sass.logError))
 		.pipe($.autoprefixer())
 		// Only uglify if gulp is ran with '--type production' or '--type deploy'
@@ -136,7 +133,6 @@ gulp.task('eslint', () => {
 
 gulp.task('build:js', () => {
 	gulp.src(paths.scripts.src)
-		.pipe($.changed(paths.scripts.dest))
 		.pipe($.babel())
 		.pipe($.concat('script.js'))
 		// Only uglify if gulp is ran with '--type production' or '--type deploy'
