@@ -65,10 +65,16 @@ header, footer {
 		right: 0;
 
 		background-color: $dark_grey;
-		background-image: url('../images/banner.jpeg');
+		background-image: url('../images/banner.jpg');
 		background-repeat: no-repeat;
 		background-position: left center;
+		background-size: 100%;
+
 		@include blur(5px);
+
+		@media screen and (min-width: 3000px) {
+			@include blur(10px);
+		}
 	}
 
 	#title {
