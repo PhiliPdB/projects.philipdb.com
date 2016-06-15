@@ -157,7 +157,18 @@ gulp.task('minify-images', () => {
 // Deploying
 gulp.task('deploy', deploy);
 function deploy() {
-	const config = require('./config.json');
+	let config;
+	try {
+		config = require('./config.json');
+	} catch (error) {
+		config = {
+			host: $.util.env.host,
+			user: $.util.env.user,
+			password: $.util.env.password,
+			remote_path: $.util.env.path
+		};
+	}
+
 	const connection = ftp.create({
 		host: config.host,
 		user: config.user,
