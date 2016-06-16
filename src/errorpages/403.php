@@ -36,7 +36,7 @@ function version($file) {
 	<div class="card">
 		<h2>403 - Forbidden</h2>
 		<p>
-			You don't have the permission to access <i><?=$_SERVER[REQUEST_URI]?> on this server</i>
+			You don't have the permission to access <i><?=$_SERVER[REQUEST_URI]?></i> on this server.
 		</p>
 		<a class="button" href="/">Go to home page</a>
 	</div>
