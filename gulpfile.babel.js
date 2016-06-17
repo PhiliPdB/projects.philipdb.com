@@ -166,23 +166,19 @@ function deploy() {
 			user: $.util.env.user,
 			password: $.util.env.password,
 			remote_path: $.util.env.path
-		};
+		}
 	}
 
-	const connection = ftp.create({
-		host: config.host,
-		user: config.user,
-		password: config.password,
-		log: $.util.log
-	});
+	const globs = 'build/**';
+	const remotePath = $.util.env.beta ? config.beta_path : config.remote_path;
 
-	const globs = 'build/**'
-
-	// using base = './build' will transfer everything to folder correctly 
-	// turn off buffering in gulp.src for best performance 
 	return gulp.src(globs, { base: './build', buffer: false })
-		.pipe(connection.newer(config.remote_path)) // only upload newer files 
-		.pipe(connection.dest(config.remote_path));
+		.pipe($.sftp({
+			host: config.host,
+			user: config.user,
+			pass: config.password,
+			remotePath: remotePath
+		}));
 }
 
 // MISC
