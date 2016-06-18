@@ -2,7 +2,6 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import pngquant from 'imagemin-pngquant';
-import ftp from 'vinyl-ftp';
 import del from 'del';
 
 const $ = gulpLoadPlugins({

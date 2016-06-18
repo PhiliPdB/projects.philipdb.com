@@ -1,6 +1,6 @@
 {
   "name": "philipdb.com",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "My personal website",
   "author": "PhiliPdB <phlpdbrn@gmail.com>",
   "repository": "https://github.com/PhiliPdB/philipdb.com",
@@ -29,7 +29,6 @@
     "gulp-sftp": "^0.1.5",
     "gulp-uglify": "^1.5.2",
     "gulp-util": "^3.0.7",
-    "imagemin-pngquant": "^4.2.2",
-    "vinyl-ftp": "^0.4.5"
+    "imagemin-pngquant": "^4.2.2"
   }
 }
