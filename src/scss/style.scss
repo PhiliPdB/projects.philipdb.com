@@ -64,11 +64,13 @@ header, footer {
 		bottom: 0;
 		right: 0;
 
-		background-color: $dark_grey;
-		background-image: url('../images/banner.jpg');
-		background-repeat: no-repeat;
-		background-position: left center;
-		background-size: 100%;
+		background: {
+			color: $dark_grey;
+			image: url('../images/banner.jpg');
+			repeat: no-repeat;
+			position: left center;
+			size: 100%;
+		}
 
 		@include blur(5px);
 
