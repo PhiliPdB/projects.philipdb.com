@@ -58,7 +58,7 @@ function version($file) {
 			<li><a target="_blank" href="/pong">Pong</a></li>
 			<li><a target="_blank" href="/minesweeper">MineSweeper</a></li>
 			<li><a target="_blank" href="/tictactoe">Tic Tac Toe</a></li>
-			<li><a target="_blank" href="https://play.google.com/store/apps/details?id=nl.philipdb.snake">Snake</a></li>
+			<li><a target="_blank" href="https://play.google.com/store/apps/details?id=nl.philipdb.snake">Snake &#40;Android app&#41;</a></li>
 		</ul>
 	</div>
 
