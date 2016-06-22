@@ -29,7 +29,7 @@ function version($file) {
 	<!-- Banner -->
 	<div id="home">
 		<div class="background_image"></div>
-		<div id="title" class="center">
+		<div id="title">
 			<h1>Projects list</h1>
 		</div>
 	</div>
