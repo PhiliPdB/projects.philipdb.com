@@ -1,11 +1,11 @@
 window.onload = () => {	
-	addEvent(window, 'scroll', updateHeaderBackground);
+	addEvent(window, "scroll", updateHeaderBackground);
 	updateHeaderBackground();
 }
 
 function updateHeaderBackground(event) {
-	const header = document.getElementById('header_background');
-	const banner = document.getElementById('home');
+	const header = document.getElementById("header_background");
+	const banner = document.getElementById("home");
 	const scrollTop = window.scrollY;
 	let offset = 0;
 	let node = banner;

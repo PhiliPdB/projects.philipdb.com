@@ -1,6 +1,6 @@
 <?php 
 // Enable PHP Gzip compression
-ob_start('ob_gzhandler');
+ob_start("ob_gzhandler");
 
 function version($file) {
 	return $file . '?' . filemtime($file);
@@ -16,14 +16,14 @@ function version($file) {
 	
 	<title>404 - Not found</title>
 	
-	<link rel="stylesheet" href="<?=version('../css/style.css')?>">
+	<link rel="stylesheet" href="<?=version("../css/style.css")?>">
 
 	<!-- Favicons -->
-	<?php include('../favicons.html') ?>
+	<?php include("../favicons.html") ?>
 </head>
 <body>
 	<!-- Header -->
-	<?php require('../components/header.html'); ?>
+	<?php require("../components/header.html"); ?>
 
 	<!-- Banner -->
 	<div id="home">
@@ -43,14 +43,14 @@ function version($file) {
 	<div class="card">
 		<h2>Find what you are looking for</h2>
 		<div id="search">
-			<?php require('../cse.html') ?>
+			<?php require("../cse.html") ?>
 		</div>
 	</div>
 
 	<!-- Footer -->
-	<?php require('../components/footer.html'); ?>
+	<?php require("../components/footer.html"); ?>
 	
 	<!-- Scripts -->
-	<script src="<?=version('../js/script.js')?>" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="<?=version("../js/script.js")?>" type="text/javascript" charset="utf-8" async defer></script>
 </body>
 </html>
