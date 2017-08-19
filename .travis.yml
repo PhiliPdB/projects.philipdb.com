@@ -6,7 +6,7 @@ notifications:
 sudo: false
 
 node_js:
-- '6'
+- 'lts/*'
 
 before_script:
 - npm install
