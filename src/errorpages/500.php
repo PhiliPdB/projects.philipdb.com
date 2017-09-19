@@ -16,7 +16,7 @@ function version($file) {
 
     <title>500 - Internal Server Error</title>
 
-    <link rel="stylesheet" href="<?=version("../css/main.css")?>">
+    <link rel="stylesheet" href="<?=version("../css/style.css")?>">
 
     <!-- Favicons -->
     <?php include("../favicons.html") ?>
