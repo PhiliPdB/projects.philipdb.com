@@ -22,28 +22,28 @@ function version($file) {
     <?php include("../favicons.html") ?>
 </head>
 <body>
-<!-- Header -->
-<?php require("../components/header.php"); ?>
+    <!-- Header -->
+    <?php require("../components/header.html"); ?>
 
-<!-- Banner -->
-<div id="home">
-    <div class="background_image"></div>
-    <div id="title" class="center">
-        <h1>Internal Server Error</h1>
+    <!-- Banner -->
+    <div id="home">
+        <div class="background_image"></div>
+        <div id="title" class="center">
+            <h1>Internal Server Error</h1>
+        </div>
     </div>
-</div>
 
-<div class="card">
-    <h2>500 - Internal Server Error</h2>
-    <p>
-        Unfortunately, the server failed to perform the task it was requested to do.
-    </p>
-</div>
+    <div class="card">
+        <h2>500 - Internal Server Error</h2>
+        <p>
+            Unfortunately, the server failed to perform the task it was requested to do.
+        </p>
+    </div>
 
-<!-- Footer -->
-<?php require("../components/footer.php"); ?>
+    <!-- Footer -->
+    <?php require("../components/footer.html"); ?>
 
-<!-- Scripts -->
-<script src="<?=version("../js/script.js")?>" type="text/javascript" charset="utf-8" async defer></script>
+    <!-- Scripts -->
+    <script src="<?=version("../js/script.js")?>" type="text/javascript" charset="utf-8" async defer></script>
 </body>
 </html>
