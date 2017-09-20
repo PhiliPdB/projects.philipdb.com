@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Enable PHP Gzip compression
 ob_start("ob_gzhandler");
 
@@ -11,9 +11,9 @@ function version($file) {
 <head>
 	<?php require("metatags.html") ?>
 	<meta name="robots" content="index, follow" />
-	
+
 	<title>Project list</title>
-	
+
 	<link rel="stylesheet" href="<?=version("css/style.css")?>">
 
 	<!-- Favicons -->
@@ -24,7 +24,7 @@ function version($file) {
 	<?php include_once("analytics.html") ?>
 
 	<!-- Header -->
-	<?php require("components/header.html") ?>
+	<?php require("components/header.php") ?>
 
 	<!-- Banner -->
 	<div id="home">
@@ -63,7 +63,7 @@ function version($file) {
 	</div>
 
 	<!-- Footer -->
-	<?php require("components/footer.html"); ?>
+	<?php require("components/footer.php"); ?>
 
 	<!-- Scripts -->
 	<script src="<?=version("js/script.js")?>" type="text/javascript" charset="utf-8" async defer></script>

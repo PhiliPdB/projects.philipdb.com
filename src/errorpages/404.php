@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Enable PHP Gzip compression
 ob_start("ob_gzhandler");
 
@@ -13,9 +13,9 @@ function version($file) {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta name="robots" content="noindex, follow" />
-	
+
 	<title>404 - Not found</title>
-	
+
 	<link rel="stylesheet" href="<?=version("../css/style.css")?>">
 
 	<!-- Favicons -->
@@ -23,7 +23,7 @@ function version($file) {
 </head>
 <body>
 	<!-- Header -->
-	<?php require("../components/header.html"); ?>
+	<?php require("../components/header.php"); ?>
 
 	<!-- Banner -->
 	<div id="home">
@@ -48,8 +48,8 @@ function version($file) {
 	</div>
 
 	<!-- Footer -->
-	<?php require("../components/footer.html"); ?>
-	
+	<?php require("../components/footer.php"); ?>
+
 	<!-- Scripts -->
 	<script src="<?=version("../js/script.js")?>" type="text/javascript" charset="utf-8" async defer></script>
 </body>
