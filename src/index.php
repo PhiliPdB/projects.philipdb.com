@@ -39,7 +39,6 @@ function version($file) {
 		<ul class="first">
 			<li><a target="_blank" href="/mastermind">MasterMind</a></li>
 			<li><a target="_blank" href="/systeminfo">SystemInfo</a></li>
-			<li><a target="_blank" href="/PillowBook">PillowBook &#40;Sorry for dutch&#41;</a></li>
 			<li><a target="_blank" href="/analogClock">Analog Clock</a></li>
 		</ul>
 		<a class="button" href="//github.com/PhiliPdB" target="_blank">View my GitHub profile</a>
@@ -56,7 +55,6 @@ function version($file) {
 		<h2>Older projects</h2>
 		<ul class="first">
 			<li><a target="_blank" href="/pong">Pong</a></li>
-			<li><a target="_blank" href="/minesweeper">MineSweeper</a></li>
 			<li><a target="_blank" href="/tictactoe">Tic Tac Toe</a></li>
 			<li><a target="_blank" href="https://play.google.com/store/apps/details?id=nl.philipdb.snake">Snake &#40;Android app&#41;</a></li>
 		</ul>
