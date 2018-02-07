@@ -25,7 +25,7 @@ const paths = {
 	},
 	html: {
 		src: 'src/**/*.{php,html}',
-		watch: ['src/*.php', 'src/components/**/*.html'],
+		watch: ['src/*.php', 'src/components/**/*.html', 'src/php/**/*.php'],
 		dest: 'build/'
 	}
 };

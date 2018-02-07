@@ -2,9 +2,13 @@
 // Enable PHP Gzip compression
 ob_start("ob_gzhandler");
 
-function version($file) {
-	return $file . '?' . filemtime($file);
-}
+require('php/main.php');
+
+$main = new main(true);
+
+// Get older projects to display
+$projects = $main->getProjects();
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +18,7 @@ function version($file) {
 
 	<title>Project list</title>
 
-	<link rel="stylesheet" href="<?=version("css/style.css")?>">
+	<link rel="stylesheet" href="<?=$main->version("css/style.css")?>">
 
 	<!-- Favicons -->
 	<?php include("favicons.html") ?>
@@ -34,36 +38,24 @@ function version($file) {
 		</div>
 	</div>
 
-	<div class="card">
-		<h2>Web projects</h2>
-		<ul class="first">
-			<li><a target="_blank" href="/mastermind">MasterMind</a></li>
-			<li><a target="_blank" href="/systeminfo">SystemInfo</a></li>
-			<li><a target="_blank" href="/analogClock">Analog Clock</a></li>
-		</ul>
-		<a class="button" href="//github.com/PhiliPdB" target="_blank">View my GitHub profile</a>
-	</div>
-	<div class="card">
-		<h2>Android projects</h2>
-		<ul class="first">
-			<li><a target="_blank" href="https://play.google.com/apps/testing/com.woording.android">Woording &#40;beta&#41;</a></li>
-			<li><a target="_blank" href="https://play.google.com/store/apps/details?id=nl.philipdb.abcformule">Quadratic equation</a></li>
-		</ul>
-		<a class="button" href="https://play.google.com/store/apps/dev?id=4947359272689647365" target="_blank">View Android developer page</a>
-	</div>
-	<div class="card">
-		<h2>Older projects</h2>
-		<ul class="first">
-			<li><a target="_blank" href="/pong">Pong</a></li>
-			<li><a target="_blank" href="/tictactoe">Tic Tac Toe</a></li>
-			<li><a target="_blank" href="https://play.google.com/store/apps/details?id=nl.philipdb.snake">Snake &#40;Android app&#41;</a></li>
-		</ul>
-	</div>
+    <?php foreach ($projects as $project): ?>
+        <div class="card">
+            <h2><?=$project["opc_name"]?></h2>
+            <ul class="first">
+                <?php foreach ($project["projects"] as $item): ?>
+                    <li><a target="_blank" href="<?=$item["old_project_url"]?>"><?=$item["old_project_name"]?></a></li>
+                <?php endforeach; ?>
+            </ul>
+            <?php foreach ($project["opc_links"] as $link): ?>
+                <a class="button" target="_blank" href="<?=$link["opcl_url"]?>"><?=$link["opcl_name"]?></a>
+            <?php endforeach; ?>
+        </div>
+    <?php endforeach; ?>
 
 	<!-- Footer -->
 	<?php require("components/footer.php"); ?>
 
 	<!-- Scripts -->
-	<script src="<?=version("js/script.js")?>" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="<?=$main->version("js/script.js")?>" type="text/javascript" charset="utf-8" async defer></script>
 </body>
 </html>
