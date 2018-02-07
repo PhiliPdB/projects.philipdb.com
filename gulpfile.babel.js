@@ -176,7 +176,10 @@ function deploy() {
 		}
 	}
 
-	const globs = 'build/**';
+    const globs = [
+        'build/**',
+        '!build/php/config.php'
+    ];
 	const remotePath = $.util.env.beta ? config.beta_path : config.remote_path;
 
 	return gulp.src(globs, { base: './build', buffer: false })
