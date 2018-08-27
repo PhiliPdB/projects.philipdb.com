@@ -6,7 +6,7 @@ notifications:
 sudo: false
 
 node_js:
-- 'lts/*'
+- lts/*
 
 before_script:
 - npm install
@@ -14,22 +14,20 @@ before_script:
 script:
 - gulp build
 
-deploy:
-  provider: script
-  script: gulp deploy --host $DEPLOY_HOST --user $DEPLOY_USER --password $DEPLOY_PASSWORD --path $DEPLOY_PATH
-  skip_cleanup: true
-  on:
-    branch: production
-
 # Cache setup
 cache:
   directories:
   - node_modules
 
-# Variables
-env:
-  global:
-  - secure: uGK5b940KYhxj4+Sspl4tZy+YsiZwr83RREVmNpblenixXKFS5Nj5MK25FZ3f+FEsJkQwiLMW0JAFNUZhW90K7bzpsycRZ/rDQD2JoC8om4tGgsVByYtmXsgsVGYrfMe5Mf6YBx6lXvZirc7TSbsyZQC7mmrij8LxWzc8EbkAiCzu4bckmJODrVHaFEyKQS1A/euf1RX/kUBdgLC5b/dwmSmgcE0W4Gvmtg5auZD+8ET8IWfA4j7TGAvsu3b1stXNfBQczXbdPvfZ1L/sJKDhkvp15CO98fVlYf1prq25UlR6S6dnNY/aWQCa3PdHX7zNjPNSL/ga5XsqJc58Fs3T6w6dnKb3SVVbdwU5A53X9Wt0eb7MXTTCXqDyJC2zEyvcv0cTA3CM16AQXSEyInIWFvRAdV6YW1pI66kNmGsY9G037F0r6DT3gGiZ/6l9dapS/69n2BNUPR2WdHPFVs5ZqdiSuazFVJrpSHAxwt8iVlb1ohzjztu6zw5KQEEqyos2P+rsChpu8kWvQdgtenD0vHPNNn0bnmuLQYbuKhbVKTf4STGUMUsw72X9cwGcOb3Z+HMLDMQcRheUkEr0BcgDTScT/mbWM46B1betjNLqosb3yTdx14DMDvehYdL7ljw2p339dXtPU34GPt8dTY2fiOkXENhWmmFJDRoinNC2c0=
-  - secure: wKG2nHX/2BsiX/iLn+dlKC51qBaIqvrO8X2Vh7WEo0nSmqnrBJJcsmHiQqhSGndgj8dZNX5STplQhRDkh/c2gM8Ie2SbrpWJinCMfb4klZKryg7kNh1LJ914yr4Srv5abCDmlpMC/X+0JQbYk63z8FCB2iWV6A7sH8xQl+ECwbcxm9FmPurfDTFE/PgcgEJV+cX8jqr1wTht5qlR7dR9PiVmvjvPceE2x9kFX4nj4+D1m6IX2tj6ZxRIaka05enoO4h12y1ixDfh5XQdoPLlRLosnQXPuTtg7eou5Np3SekPybETch4/KYhdBKakl0qmFoIsRuoB4oIXzoAUKTR4RG49DuN6yEiqWRfrWcEzYmv5rSfQF/XvNvw7loLB7eWzUtkjhcGPSYNRWZKKWPmYPm168HTQwXcPKAe4+m7LVQT+GdUYFUecMvJe4QxPnuuSFDxa6k764oKD42RVu6DfyXYXRooykzBv8At0I0lxSHwJs1zDikdqbVK0tbeBaomYVobZ11+74UjydW3GVfIhu5Sg6L1HO8+jsU+AtFNU2UhSh4S5rUFZoS0z1MogtVyUPs2ErWm3IRbHGNeSR6tl/LtsaMuHMB0bVZieyjFKatDeVyBMpZKXoHW2iPeTXjTaFYhc9CGaL29Kk96uoPxWqcRECbYww3fohLn0x5W7kJI=
-  - secure: gv5qLtrFGaOxdY3COFCmDWXXbxbdocheTx5vziOsroLSq+YBjqZ24xCGWmWMQCDbY8PQB6r8H9TnWZTrvw7ci86nCE60Dsny3cu78sYmWjpp/kVnpQ8R5pKo5LjylEQw045RPvAtKSAiQkCLvGXnC5+Sn7aTdOhFteb81iaUgb4Q4N69pPlCyFnD8GaA/dQJBMx4rHL9D2HMMF8DJPlrjzND5WCzRAEMqflFj9Wqgo7cDt4JNHP1g75SI3NOwN0noH8QilDsSlvtgw4eGXq8yX08njpgGLaWfwvXF8d+kAF7Bw9jBRfNaJ2nzsLRj0q6Pf1jFEj3fAgnfugWQWkGef5xGbX4DfqLjrM4PQpX2nX3nlcvYxtCccz8CyyTmNi7dd4nS2a3bdSe0rEh11hovXuEUFKwBmwT1Gfa7tgFbJC8TbbtICGgHbwNLu5c0UG+nWvWorfATKpO4KAM4jt3hGJ4DIt8N9uHgECzSzP3iOlITUNhSgy/OjXqq9JsLNv+5WZdA5wWO84OFprojsnQ8/w+DqOCsk1u1G6O3yX1h4HTafZASZd5dQtokGuT24cHX9KBujLHFzYFleCEfMnKgqEmT8ir4r78yTo50XhaRnIU2ZMASSxd3W2W0mRmkUc/0lX0RHB7HqEN1xQDEK2NhA5UZ0aAAxjJfRvSTj31Cvo=
-  - secure: LaxdhM4EyhooT/kCcwTB4PzZFTEYAiw3/BkyUm3oW00y9OGDf7sLNRZ+DzLFWKL9Yakfu43S0gU1FUe5smuVSCUqyN2FA/mJuFb1fnWS7ZuDfCEYfNbWPD4DpcyegMlQCo6ugg5o1DAqwaIYfH4xj8EqqsZo4gpE/WILpTjwXX9m22RILUpI0riodD2Au3ONp1MSBAFWjn4J2qzSvVIh7v5xZmGoxNioxdHUEatfU1Xxhzk0CjDruD8dvdPMC2X+J34ISSrld8Y2K18axa1jZHFNmyllvoc8Vl8JwKfYejQEfE4wrL5TQ9rGqGcmM15vSyXRq6HzDFv6AzSVY2mBHNdp4pmdN+DczPNYlkpTkA2Bf+C+4ksm/LZPzIFXuPhOfIlLQlZX6J3APJvD5Y7o1zTuhPYkpFJEBwma8lTfWPJltBPaZ7fiLHB6Ev+YuxPZ1NUjk6VVR8JRRP1rUyxhtgA+pTwwd34RUb5aJ2nNrDTIFrN6M0RE9s9y4aFfIqQ2s5GeFdf6KPNqEtKE07tgIh+BCF02Oax3dGnNcmtT2b9y4Yd+iBskuHam9iAEQWUnSMQjpdPvp8/zcMX7dq4hzvhB9gVoaCa/sJ7qVfZrcCkYdSwnNDqXjf4sw4aKXQ5lSYVsgdib/h60zK3Nxu2Z2YgHSMl4OPLGc9Mbw0vp/I4=
+# Decrypt private key and add the known hosts
+before_install:
+- openssl aes-256-cbc -K $encrypted_47d2dcf4817b_key -iv $encrypted_47d2dcf4817b_iv
+  -in .travis/id_rsa.enc -out .travis/id_rsa -d
+- cat .travis/known_hosts >> $HOME/.ssh/known_hosts
+
+deploy:
+  provider: script
+  script: "./.travis/deploy.sh"
+  skip_cleanup: true
+  on:
+    branch: production
