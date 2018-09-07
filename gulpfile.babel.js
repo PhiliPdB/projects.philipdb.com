@@ -1,14 +1,28 @@
 import gulp from 'gulp';
-import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import pngquant from 'imagemin-pngquant';
 import del from 'del';
 
+// For handling js imports
+import browserify from 'browserify';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
+import glob from 'glob';
+import eventStream from 'event-stream';
+
+// Load gulp plugins
+import gulpLoadPlugins from 'gulp-load-plugins';
 const $ = gulpLoadPlugins({
 	rename: {
 		'gulp-connect-php': 'phpConnect'
 	}
 });
+
+// Es6 uglify
+import uglifyjs from "uglify-es";
+import composer from "gulp-uglify/composer";
+
+const minify = composer(uglifyjs, console);
 
 const paths = {
 	styles: {
@@ -25,7 +39,7 @@ const paths = {
 	},
 	html: {
 		src: 'src/**/*.{php,html}',
-		watch: ['src/*.php', 'src/components/**/*.html', 'src/php/**/*.php'],
+		watch: ['src/*.php', 'src/components/**/*.php', 'src/php/**/*.php'],
 		dest: 'build/'
 	}
 };
@@ -33,7 +47,7 @@ const liveReloadFiles = [
 	'build/css/**/*.css',
 	'build/js/**/*.js',
 	'build/images/**/*.{png,jpg,jpeg}',
-	'build/components/**/*.html',
+	'build/components/**/*.php',
 	'build/**/index.php'
 ];
 
@@ -57,28 +71,28 @@ gulp.task('connect', () => {
 		port: 6000
 	});
 
-    // Another server for phpMyAdmin, since connect-php doesn't support multiple bases
-    $.phpConnect.server({
-        base: './phpmyadmin',
-        open: false,
-        hostname: '0.0.0.0',
-        port: 1337
-    });
+	// Another server for phpMyAdmin, since connect-php doesn't support multiple bases
+	$.phpConnect.server({
+		base: './phpmyadmin',
+		open: false,
+		hostname: '0.0.0.0',
+		port: 1337
+	});
 });
 
 gulp.task('browser-sync', () => {
 	browserSync({
 		files: liveReloadFiles,
 		proxy: 'localhost:6000',
-    	port: 8080,
-    	open: false,
-    	ui: {
-    		port: 3001,
-    		weinre: {
-    			port: 8000
-    		}
-    	}
-	}, (err, bs) => {
+		port: 8080,
+		open: false,
+		ui: {
+			port: 3001,
+			weinre: {
+				port: 8000
+			}
+		}
+	}, (err) => {
 		if (err)
 			console.log(err);
 		else
@@ -98,8 +112,6 @@ gulp.task('build', ['build:html', 'build:scss', 'build:js', 'minify-images'], ()
 	gulp.src('src/robots.txt')
 		.pipe($.changed('build/'))
 		.pipe(gulp.dest('build/'));
-
-	if ($.util.env.type === 'deploy') deploy();
 });
 
 // HTML/php stuff
@@ -112,10 +124,7 @@ gulp.task('build:html', () => {
 				path.basename = 'index';
 			}
 		}))
-		.pipe(gulp.dest(paths.html.dest))
-		.pipe(browserSync.reload({
-			stream: true
-		}));
+		.pipe(gulp.dest(paths.html.dest));
 });
 
 // scss stuff
@@ -125,10 +134,7 @@ gulp.task('build:scss', () => {
 		.pipe($.autoprefixer())
 		// Only uglify if gulp is ran with '--type production' or '--type deploy'
 		.pipe($.util.env.type === 'production' || $.util.env.type === 'deploy' ? $.cssnano() : $.util.noop())
-		.pipe(gulp.dest(paths.styles.dest))
-		.pipe(browserSync.reload({
-			stream: true
-		}));
+		.pipe(gulp.dest(paths.styles.dest));
 });
 
 // JS stuff
@@ -138,16 +144,37 @@ gulp.task('eslint', () => {
 		.pipe($.eslint.format());
 });
 
-gulp.task('build:js', () => {
-	gulp.src(paths.scripts.src)
-		.pipe($.babel())
-		.pipe($.concat('script.js'))
-		// Only uglify if gulp is ran with '--type production' or '--type deploy'
-		.pipe($.util.env.type === 'production' || $.util.env.type === 'deploy' ? $.uglify() : $.util.noop())
-		.pipe(gulp.dest(paths.scripts.dest))
-		.pipe(browserSync.reload({
-			stream: true
-		}));
+gulp.task('build:js', (done) => {
+	const debug = !($.util.env.type === 'production' || $.util.env.type === 'deploy');
+
+	glob(paths.scripts.src, (error, files) => {
+		if (error) done(error);
+
+		const tasks = files.map((entry) => {
+			if (!debug) {
+				return browserify({
+					entries: [entry],
+					standalone: "app",
+					debug: false
+				})
+					.bundle()
+					.pipe(source(entry.replace("src/js/", "")))
+					.pipe(buffer())
+					.pipe(minify())
+					.pipe(gulp.dest(paths.scripts.dest))
+			}
+				
+			return browserify({
+				entries: [entry],
+				standalone: "app",
+				debug: true
+			})
+				.bundle()
+				.pipe(source(entry.replace("src/js/", "")))
+				.pipe(gulp.dest(paths.scripts.dest));
+		});
+		eventStream.merge(tasks).on('end', done);
+	});
 });
 
 // Images
@@ -161,39 +188,9 @@ gulp.task('minify-images', () => {
 		.pipe(gulp.dest(paths.images.dest));
 });
 
-// Deploying
-gulp.task('deploy', deploy);
-function deploy() {
-	let config;
-	try {
-		config = require('./config.json');
-	} catch (error) {
-		config = {
-			host: $.util.env.host,
-			user: $.util.env.user,
-			password: $.util.env.password,
-			remote_path: $.util.env.path
-		}
-	}
-
-    const globs = [
-        'build/**',
-        '!build/php/config.php'
-    ];
-	const remotePath = $.util.env.beta ? config.beta_path : config.remote_path;
-
-	return gulp.src(globs, { base: './build', buffer: false })
-		.pipe($.sftp({
-			host: config.host,
-			user: config.user,
-			pass: config.password,
-			remotePath: remotePath
-		}));
-}
-
 // MISC
 gulp.task('rebuild', ['clear:build', 'build']);
 
-gulp.task('clear:build', done => {
+gulp.task('clear:build', () => {
 	return del('build');
 });
