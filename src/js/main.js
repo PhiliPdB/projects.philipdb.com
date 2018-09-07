@@ -1,10 +1,10 @@
 window.onload = () => {
 	// Set up everything...
-	addEvent(window, "scroll", updateHeaderBackground);
+	window.addEventListener("scroll", updateHeaderBackground);
 	updateHeaderBackground();
 }
 
-function updateHeaderBackground(event) {
+function updateHeaderBackground() {
 	const header = document.getElementById("header_background");
 	const banner = document.getElementById("home");
 	const scrollTop = window.scrollY;
@@ -30,28 +30,3 @@ function updateHeaderBackground(event) {
 		header.style.opacity = 0;
 	}
 }
-
-// This is a function from https://github.com/remy/html5demos
-const addEvent = (() => {
-	if (document.addEventListener) {
-		return (el, type, fn) => {
-			if (el && el.nodeName || el === window) {
-				el.addEventListener(type, fn, false);
-			} else if (el && el.length) {
-				for (let i = 0; i < el.length; i++) {
-					addEvent(el[i], type, fn);
-				}
-			}
-		};
-	} else {
-		return (el, type, fn) => {
-			if (el && el.nodeName || el === window) {
-				el.attachEvent(`on${type}`, () => { return fn.call(el, window.event); });
-			} else if (el && el.length) {
-				for (let i = 0; i < el.length; i++) {
-					addEvent(el[i], type, fn);
-				}
-			}
-		};
-	}
-})();
