@@ -12,6 +12,7 @@ before_script:
 - npm install
 
 script:
+- export NODE_ENV=production
 - gulp build
 
 # Cache setup

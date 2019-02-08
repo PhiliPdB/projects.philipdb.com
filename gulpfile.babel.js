@@ -51,19 +51,22 @@ const liveReloadFiles = [
 	'build/**/index.php'
 ];
 
-gulp.task('default', ['serve', 'watch']);
+// Start the local servers
+export const serve = gulp.parallel(createPhpServers, startBrowserSync);
 
-gulp.task('serve', ['connect', 'browser-sync']);
+// Serve & watch
+export default gulp.parallel(serve, watch);
 
-gulp.task('watch', () => {
-	gulp.watch(paths.styles.src, ['build:scss']);
-	gulp.watch(paths.scripts.src, ['eslint', 'build:js']);
-	gulp.watch(paths.images.src, ['minify-images']);
-	gulp.watch(paths.html.watch, ['build:html']);
-});
+// Watch files for changes
+export function watch() {
+	gulp.watch(paths.styles.src,  build_scss);
+	gulp.watch(paths.scripts.src, gulp.series(eslint, build_js));
+	gulp.watch(paths.images.src,  minify_images);
+	gulp.watch(paths.html.watch,  build_html);
+}
 
 // Start the server
-gulp.task('connect', () => {
+export function createPhpServers() {
 	// PHP server (will be proxied)
 	$.phpConnect.server({
 		base: './build/',
@@ -78,9 +81,9 @@ gulp.task('connect', () => {
 		hostname: '0.0.0.0',
 		port: 1337
 	});
-});
+}
 
-gulp.task('browser-sync', () => {
+export function startBrowserSync() {
 	browserSync({
 		files: liveReloadFiles,
 		proxy: 'localhost:6000',
@@ -98,25 +101,37 @@ gulp.task('browser-sync', () => {
 		else
 			console.log('BrowserSync is ready.');
 	});
-});
+}
 
 // Build all
-gulp.task('build', ['build:html', 'build:scss', 'build:js', 'minify-images'], () => {
+export const build = gulp.parallel(
+	build_html,
+	build_scss,
+	build_js,
+	minify_images,
+	copy_files
+);
+
+function copy_files() {
 	// Copy other required files to build if changed
 	gulp.src('src/fonts/**.*')
 		.pipe($.changed('build/fonts'))
 		.pipe(gulp.dest('build/fonts'));
-	gulp.src('src/favicons/**.{json,xml,ico,svg}')
+
+	gulp.src('src/favicons/**.{json,xml,ico}')
 		.pipe($.changed('build/favicons'))
 		.pipe(gulp.dest('build/favicons'));
+
 	gulp.src('src/robots.txt')
 		.pipe($.changed('build/'))
 		.pipe(gulp.dest('build/'));
-});
+
+	return Promise.resolve("Copied files");
+}
 
 // HTML/php stuff
-gulp.task('build:html', () => {
-	gulp.src(paths.html.src)
+export function build_html() {
+	return gulp.src(paths.html.src)
 		.pipe($.changed(paths.html.dest))
 		.pipe($.rename((path) => {
 			if (path.dirname === '.' && path.extname === '.php' && path.basename !== 'index') {
@@ -125,27 +140,27 @@ gulp.task('build:html', () => {
 			}
 		}))
 		.pipe(gulp.dest(paths.html.dest));
-});
+}
 
 // scss stuff
-gulp.task('build:scss', () => {
-	gulp.src(paths.styles.src)
+export function build_scss() {
+	return gulp.src(paths.styles.src)
 		.pipe($.sass().on('error', $.sass.logError))
 		.pipe($.autoprefixer())
-		// Only uglify if gulp is ran with '--type production' or '--type deploy'
-		.pipe($.util.env.type === 'production' || $.util.env.type === 'deploy' ? $.cssnano() : $.util.noop())
+		// Only minify when we are in production
+		.pipe($.if(process.env.NODE_ENV === "production", $.cssnano()))
 		.pipe(gulp.dest(paths.styles.dest));
-});
+}
 
 // JS stuff
-gulp.task('eslint', () => {
-	gulp.src(paths.scripts.src)
+export function eslint() {
+	return gulp.src(paths.scripts.src)
 		.pipe($.eslint('.eslintrc'))
 		.pipe($.eslint.format());
-});
+}
 
-gulp.task('build:js', (done) => {
-	const debug = !($.util.env.type === 'production' || $.util.env.type === 'deploy');
+export function build_js(done) {
+	const debug = !(process.env.NODE_ENV === "production");
 
 	glob(paths.scripts.src, (error, files) => {
 		if (error) done(error);
@@ -163,7 +178,7 @@ gulp.task('build:js', (done) => {
 					.pipe(minify())
 					.pipe(gulp.dest(paths.scripts.dest))
 			}
-				
+
 			return browserify({
 				entries: [entry],
 				standalone: "app",
@@ -175,22 +190,22 @@ gulp.task('build:js', (done) => {
 		});
 		eventStream.merge(tasks).on('end', done);
 	});
-});
+}
 
 // Images
-gulp.task('minify-images', () => {
-	gulp.src(paths.images.src)
+export function minify_images() {
+	return gulp.src(paths.images.src)
 		.pipe($.changed(paths.images.dest))
 		.pipe($.imagemin({
 			progressive: true,
 			use: [pngquant()]
 		}))
 		.pipe(gulp.dest(paths.images.dest));
-});
+}
 
 // MISC
-gulp.task('rebuild', ['clear:build', 'build']);
+export const rebuild = gulp.series(clear_build, build);
 
-gulp.task('clear:build', () => {
+export function clear_build()  {
 	return del('build');
-});
+}
