@@ -7,7 +7,7 @@
   "bugs": "https://github.com/PhiliPdB/projects.philipdb.com/issues",
   "license": "UNLICENSED",
   "dependencies": {
-    "@babel/core": "^7.3.3",
+    "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.1",
     "@babel/register": "^7.0.0",
     "browserify": "^16.2.3",
