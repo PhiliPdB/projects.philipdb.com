@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.26.3",
-    "del": "^3.0.0",
+    "del": "^4.0.0",
     "eslint": "^5.15.0",
     "gulp-cache": "^1.1.1",
     "gulp-concat": "^2.6.1",
